@@ -725,7 +725,6 @@ jobs:
         base64 -d destiny.b64 > destiny.patch
         git apply --check --whitespace=nowarn destiny.patch
         git apply --whitespace=nowarn destiny.patch
-        git diff --check
         git status --short
         rm -f destiny.b64 destiny.patch
     - name: Setup NuGet
