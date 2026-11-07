@@ -40,7 +40,7 @@ jobs:
       with:
         fetch-depth: 0
         ref: 9508444d31338e89a4f4cee1d0cee1800c96d2c1
-    - name: Apply Destiny rendering and shader-cache validation patches
+    - name: Apply Destiny rendering, shader-cache, and live fragment parser patches
       run: |
         cat > destiny.b64 <<'EOF_B64'
         ZGlmZiAtLWdpdCBhL3JwY3MzL0VtdS9DZWxsL1NQVVRocmVhZC5jcHAgYi9ycGNzMy9FbXUvQ2Vs
@@ -720,7 +720,24 @@ jobs:
         dGF0aWNfY2FzdDxmcmFnbWVudF9lcnJvcj4oZXJyb3IpKQorCQkJCQk8PCAnPScgPDwgY291bnRz
         W2Vycm9yXTsKKwkJCXN0ZDo6Y291dCA8PCAnXG4nOworCQl9CisJCXJldHVybiAwOworCX0KKwlj
         YXRjaCAoY29uc3Qgc3RkOjpleGNlcHRpb24mIGVycm9yKQorCXsKKwkJc3RkOjpjZXJyIDw8ICJG
-        QUlMICIgPDwgZXJyb3Iud2hhdCgpIDw8ICdcbic7CisJCXJldHVybiAxOworCX0KK30K
+        QUlMICIgPDwgZXJyb3Iud2hhdCgpIDw8ICdcbic7CisJCXJldHVybiAxOworCX0KK30KZGlmZiAt
+        LWdpdCBhL3JwY3MzL0VtdS9SU1gvUHJvZ3JhbS9Qcm9ncmFtU3RhdGVDYWNoZS5jcHAgYi9ycGNz
+        My9FbXUvUlNYL1Byb2dyYW0vUHJvZ3JhbVN0YXRlQ2FjaGUuY3BwCmluZGV4IDZhM2Y4ZWE1MC4u
+        NTRhZmU3YWRlIDEwMDY0NAotLS0gYS9ycGNzMy9FbXUvUlNYL1Byb2dyYW0vUHJvZ3JhbVN0YXRl
+        Q2FjaGUuY3BwCisrKyBiL3JwY3MzL0VtdS9SU1gvUHJvZ3JhbS9Qcm9ncmFtU3RhdGVDYWNoZS5j
+        cHAKQEAgLTYyNiwxMiArNjI2LDE2IEBAIGZyYWdtZW50X3Byb2dyYW1fdXRpbHM6OmZyYWdtZW50
+        X3Byb2dyYW1fbWV0YWRhdGEgZnJhZ21lbnRfcHJvZ3JhbV91dGlsczo6YW5hbHlzCiAJCWlmICgo
+        aW5zdC5fdTMyWzBdID4+IDgpICYgMHgxKQogCQl7CiAJCQlyZXN1bHQucHJvZ3JhbV9zdGFydF9v
+        ZmZzZXQgPSBpbmRleCAqIDE2OwotCQkJcmVzdWx0LnByb2dyYW1fdWNvZGVfbGVuZ3RoID0gMTY7
+        CisJCQljb25zdCBib29sIGhhc19saXRlcmFsID0gaXNfYW55X3NyY19jb25zdGFudChpbnN0KTsK
+        KwkJCXJlc3VsdC5wcm9ncmFtX3Vjb2RlX2xlbmd0aCA9IGhhc19saXRlcmFsID8gMzIgOiAxNjsK
+        KwkJCXJlc3VsdC5wcm9ncmFtX2NvbnN0YW50c19idWZmZXJfbGVuZ3RoID0gaGFzX2xpdGVyYWwg
+        PyAxNiA6IDA7CiAJCQlyZXN1bHQuaXNfbm9wX3NoYWRlciA9IHRydWU7CiAJCQlyZXR1cm4gcmVz
+        dWx0OwogCQl9CiAKLQkJaW5kZXgrKzsKKwkJLy8gTk9QIHNvdXJjZSBmaWVsZHMgY2FuIHJlc2Vy
+        dmUgYSBmb2xsb3dpbmcgbGl0ZXJhbCBqdXN0IGxpa2UgYW4KKwkJLy8gb3JkaW5hcnkgaW5zdHJ1
+        Y3Rpb24uIE5ldmVyIGludGVycHJldCB0aGF0IGxpdGVyYWwgYXMgcHJvZ3JhbSBjb2RlLgorCQlp
+        bmRleCArPSBpc19hbnlfc3JjX2NvbnN0YW50KGluc3QpID8gMiA6IDE7CiAJfQogCiAJd2hpbGUg
+        KHRydWUpCg==
         EOF_B64
         base64 -d destiny.b64 > destiny.patch
         git apply --check --whitespace=nowarn destiny.patch
