@@ -40,7 +40,6 @@ jobs:
       with:
         repository: RPCS3/rpcs3
         fetch-depth: 0
-        ref: 007bdd23838e4d1e03e9da9e968be475c481e8ed
     - name: Apply Destiny patch stack
       run: |
         cat > destiny-patches.b64 <<'EOF_B64'
