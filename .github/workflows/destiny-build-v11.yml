@@ -955,6 +955,17 @@ jobs:
         done < .ci/ci-vars.env
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@main
+    - name: Fix pinned OpenAL compatibility with MSVC 2026
+      shell: pwsh
+      run: |
+        $path = '3rdparty/OpenAL/openal-soft/alc/alc.cpp'
+        $source = [System.IO.File]::ReadAllText($path)
+        $old = 'std::views::transform(&ContextBase::EffectSlotCluster::operator*)'
+        $new = 'std::views::transform([](auto& cluster) -> decltype(auto) { return *cluster; })'
+        if ([regex]::Matches($source, [regex]::Escape($old)).Count -ne 1) {
+          throw 'Pinned OpenAL source differs; refusing an ambiguous compatibility edit.'
+        }
+        [System.IO.File]::WriteAllText($path, $source.Replace($old, $new), [System.Text.UTF8Encoding]::new($false))
     - name: Test deferred surface inheritance guard
       shell: cmd
       run: |
